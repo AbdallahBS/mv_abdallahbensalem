@@ -30,7 +30,11 @@ class VinylMix
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
-    private ?int $votes = null;
+    private ?int $votes = 0;
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
