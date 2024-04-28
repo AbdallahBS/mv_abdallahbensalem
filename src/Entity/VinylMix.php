@@ -27,7 +27,7 @@ class VinylMix
     private ?string $genre = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt;
+    private \DateTimeImmutable $createdAt;
 
     #[ORM\Column]
     private ?int $votes = 0;
@@ -95,7 +95,7 @@ class VinylMix
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -112,5 +112,18 @@ class VinylMix
         $this->votes = $votes;
 
         return $this;
+    }
+    public function getVotesString(): string
+    {
+        $prefix = ($this->votes === 0) ? '' : (($this->votes >= 0) ? '+' : '-');
+        return sprintf('%s %d', $prefix, abs($this->votes));
+    }
+    public function getImageUrl(int $width): string
+    {
+        return sprintf(
+            'https://picsum.photos/id/%d/%d',
+            ($this->getId() + 50) % 1000, // number between 0 and 1000, based on the id
+            $width
+        );
     }
 }
