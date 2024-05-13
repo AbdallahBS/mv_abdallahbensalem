@@ -52,9 +52,7 @@ class VinylMixRepository extends ServiceEntityRepository
                ->getResult()
             ;
         }
-    /**
-     * @return VinylMix[] Returns an array of VinylMix objects
-     */
+    
     public function createOrderedByVotesQueryBuilder(string $genre = null): QueryBuilder  
     {
         $queryBuilder = $this->addOrderByVotesQueryBuilder();
